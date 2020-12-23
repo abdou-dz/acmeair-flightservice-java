@@ -2,6 +2,8 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: acmeair-flightservice
+  labels:
+    app.kubernetes.io/part-of: acmeair-flightservice
 spec:
   replicas: 1
   selector:
@@ -48,6 +50,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: acmeair-flight-service
+  labels:
+    app.kubernetes.io/part-of: acmeair-flightservice
 spec:
   ports:
     - port: 9080
@@ -55,29 +59,13 @@ spec:
     name: acmeair-flight-deployment
 ---
 ##### Flight Database #####
-apiVersion: v1
-kind: Service
-metadata:
-  creationTimestamp: null
-  labels:
-    service: acmeair-flight-db
-  name: acmeair-flight-db
-spec:
-  ports:
-  - name: "27017"
-    port: 27017
-    protocol: TCP
-    targetPort: 27017
-  selector:
-    name: acmeair-flight-db
-status:
-  loadBalancer: {}
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   creationTimestamp: null
   name: acmeair-flight-db
+  labels:
+    app.kubernetes.io/part-of: acmeair-flightservice
 spec:
   replicas: 1
   selector:
@@ -109,3 +97,22 @@ spec:
             mountPath: /data/db
       restartPolicy: Always
 status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  name: acmeair-flight-db
+  labels:
+    service: acmeair-flight-db
+    app.kubernetes.io/part-of: acmeair-flightservice
+spec:
+  ports:
+  - name: "27017"
+    port: 27017
+    protocol: TCP
+    targetPort: 27017
+  selector:
+    name: acmeair-flight-db
+status:
+  loadBalancer: {}
