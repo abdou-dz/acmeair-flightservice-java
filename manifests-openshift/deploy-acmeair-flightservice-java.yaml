@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: acmeair-flightservice
   labels:
-    app.kubernetes.io/part-of: acmeair-flightservice
+    app.kubernetes.io/part-of: flight-service
 spec:
   replicas: 1
   selector:
@@ -51,7 +51,7 @@ kind: Service
 metadata:
   name: acmeair-flight-service
   labels:
-    app.kubernetes.io/part-of: acmeair-flightservice
+    app.kubernetes.io/part-of: flight-service
 spec:
   ports:
     - port: 9080
@@ -65,7 +65,7 @@ metadata:
   creationTimestamp: null
   name: acmeair-flight-db
   labels:
-    app.kubernetes.io/part-of: acmeair-flightservice
+    app.kubernetes.io/part-of: flight-service
 spec:
   replicas: 1
   selector:
@@ -105,7 +105,7 @@ metadata:
   name: acmeair-flight-db
   labels:
     service: acmeair-flight-db
-    app.kubernetes.io/part-of: acmeair-flightservice
+    app.kubernetes.io/part-of: flight-service
 spec:
   ports:
   - name: "27017"

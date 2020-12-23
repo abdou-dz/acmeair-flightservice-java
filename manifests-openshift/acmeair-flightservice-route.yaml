@@ -3,7 +3,7 @@ kind: Route
 metadata:
   name: acmeair-flight-route
   labels:
-    app.kubernetes.io/part-of: acmeair-flightservice
+    app.kubernetes.io/part-of: flight-service
 spec:
   host: _HOST_
   path: /flight
