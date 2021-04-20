@@ -63,6 +63,19 @@ spec:
   selector:
     name: acmeair-flight-deployment
 ---
+apiVersion: v1
+kind: Service
+metadata:
+  name: acmeair-secure-flight-service
+spec:
+  ports:
+    - name: 9443-tcp
+      protocol: TCP
+      port: 9443
+      targetPort: 9443
+  selector:
+    name: acmeair-flight-deployment
+ ---
 ##### Flight Database #####
 apiVersion: apps/v1
 kind: Deployment
