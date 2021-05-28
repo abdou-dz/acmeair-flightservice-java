@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: acmeair-flightservice-java
-        image: quay.io/abdouibm/acme-flightservice:latest
+        image: quay.io/abdouibm/acmeair-flightservice-java-4.0:latest
         ports:
           - containerPort: 9080
           - containerPort: 9443
