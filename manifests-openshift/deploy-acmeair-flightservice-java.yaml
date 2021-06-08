@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: acmeair-flightservice-java
-        image: quay.io/abdouibm/acmeair-flightservice-java-4.0:latest
+        image: quay.io/abdouibm/acmeair-flightservice-java-3.3:new
         ports:
           - containerPort: 9080
           - containerPort: 9443
@@ -36,8 +36,18 @@ spec:
           value: password
         - name: MONGO_HOST
           value: acmeair-flight-db
-        - name: SECURE_SERVICE_CALLS
-          value: 'true'
+        - name: JAEGER_AGENT_HOST
+          value: jaeger-all-in-one-inmemory-agent
+        - name: JAEGER_AGENT_PORT
+          value: '6832'
+        - name: JAEGER_ENDPOINT
+          value: 'http://jaeger-all-in-one-inmemory-collector:14268/api/traces'
+        - name: ACCESS_LOGGING_ENABLED
+          value: 'false'
+        - name: TRACE_SPEC
+          value: '*=info'
+        - name: LOGGING_FORMAT
+          value: 'simple'
         readinessProbe:
           httpGet:
             path: /health
