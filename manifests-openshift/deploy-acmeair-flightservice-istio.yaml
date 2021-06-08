@@ -76,7 +76,6 @@ metadata:
 spec:
   ports:
     - port: 9080
-      name: HTTP
   selector:
     name: acmeair-flight-deployment
 ---
@@ -134,7 +133,7 @@ metadata:
     app.kubernetes.io/part-of: flight-service
 spec:
   ports:
-  - name: HTTP
+  - name: "27017"
     port: 27017
     protocol: TCP
     targetPort: 27017
